@@ -1,0 +1,37 @@
+services:
+    laratest:
+        privileged: true
+        build:
+            context: .
+            dockerfile: Dockerfile
+        # limit memory
+        deploy:
+            resources:
+                limits:
+                    memory: 128M
+        # use by curl
+        hostname: laratest.loc
+        container_name: laratest_app
+        networks:
+            - padz_network
+        volumes:
+            - ../..:/workspaces:cached
+        # Overrides default command so things don't shut down after the process ends.
+        command: sleep infinity
+        ports:
+            - "8001:8001"
+            - "9001:9000"
+            - "5175:5175"
+        labels:
+            # laratest
+            - "traefik.http.routers.laratest.rule=Host(`laratest.loc`)"
+            - "traefik.http.routers.laratest.entrypoints=web"
+            - "traefik.http.routers.laratest.service=laratest"
+            - "traefik.http.services.laratest.loadbalancer.server.port=8001"
+
+
+
+networks:
+    padz_network:
+        external: true
+        name: donz_network
