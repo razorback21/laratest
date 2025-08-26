@@ -8,7 +8,7 @@ services:
         deploy:
             resources:
                 limits:
-                    memory: 128M
+                    memory: 256M
         # use by curl
         hostname: laratest.loc
         container_name: laratest_app
