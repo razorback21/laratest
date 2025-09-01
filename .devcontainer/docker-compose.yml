@@ -17,18 +17,25 @@ services:
         volumes:
             - ../..:/workspaces:cached
         # Overrides default command so things don't shut down after the process ends.
-        command: sleep infinity
+        command: 
+            - sleep infinity
+            - nvm use 20
         ports:
             - "8001:8001"
             - "9000:9000"
-            - "5175:5175"
+            - "5176:5175"
         labels:
             # laratest
             - "traefik.http.routers.laratest.rule=Host(`laratest.loc`)"
             - "traefik.http.routers.laratest.entrypoints=web"
             - "traefik.http.routers.laratest.service=laratest"
             - "traefik.http.services.laratest.loadbalancer.server.port=8001"
-
+        environment:
+            - XDEBUG_MODE=debug
+            - XDEBUG_START_WITH_REQUEST=yes
+            - XDEBUG_CLIENT_HOST=0.0.0.0
+            - XDEBUG_CLIENT_PORT=9003
+            - XDEBUG_IDEKEY=VSCODE
 
 
 networks:
