@@ -3,7 +3,7 @@ import laravel from 'laravel-vite-plugin';
 
 export default defineConfig({
     server: {
-        host: 'laratest.loc',
+        host: true,
         port: 5175,
         strictPort: true,
         origin: 'http://laratest.loc:5175',
