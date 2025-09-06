@@ -25,13 +25,12 @@ services:
             - 8001
             - 5175    
         labels:
+            - "traefik.enable=true"
             - "traefik.http.routers.laratest.rule=Host(`laratest.loc`)"
             - "traefik.http.routers.laratest.entrypoints=web"
             - "traefik.http.routers.laratest.service=laratest"
             - "traefik.http.services.laratest.loadbalancer.server.port=8001"
         
-
-
 networks:
     padz_network:
         external: true
