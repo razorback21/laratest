@@ -21,6 +21,9 @@ services:
         ports:
             - "8001:8001"
             - "5175:5175"
+        expose:
+            - 8001
+            - 5175    
         labels:
             - "traefik.http.routers.laratest.rule=Host(`laratest.loc`)"
             - "traefik.http.routers.laratest.entrypoints=web"
